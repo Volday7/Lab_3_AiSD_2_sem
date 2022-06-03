@@ -34,6 +34,9 @@ private:
 	int length;
 public:
 	Road(bool f = false, bool t = false, int l = 0) : federal(f), toll(t), length(l) {}
+	int getLength() {
+		return this->length;
+	}
 	operator double()
 	{
 		return length;
@@ -68,7 +71,7 @@ int main()
 {
 	Graph<City, Road> g;
 	City Samara(1000000, "Samara"), Togliatti(700000, "Togliatti"), Zhigulevsk(40000, "Zhigulevsk"), Syzran(100000, "Syzran"), Kurumoch(700, "Kurumoch"), Moscow(10000000, "Moscow");
-	Road SaTo(true, false, 70), ToZh(true, false, 15), ToSy(true, false, 100),
+	Road SaTo(true, false, 70), ToZh(true, false, -15), ToSy(true, false, 100),
 		ToKu(true, false, 30), KuSa(false, true, 30), ZhSy(true, false, 80),
 		SaMo(true, false, 1000), ToMo(true, false, 900), SyMo(true, false, 800);
 	g.addVertex(Samara);
@@ -88,6 +91,7 @@ int main()
 	g.addEdge(Togliatti, Moscow, ToMo);
 	g.addEdge(Syzran, Moscow, SyMo);
 	g.print();
+
 	g.dijkstra(Togliatti, Samara);
 	g.dijkstra(Togliatti, Syzran);
 	g.dijkstra(Samara, Syzran);

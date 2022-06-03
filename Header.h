@@ -51,13 +51,15 @@ public:
 
 	void addEdge(TVertex source, TVertex des, TEdge ed)
 	{
-		int tmp_id = ret_index(source);
-		int temp_id = ret_index(des);
-		destination temp;
-		temp.des = des;
-		temp.edge = ed;
-		temp.id = temp_id;
-		table[tmp_id].dest.push_back(temp);
+		if (ed.getLength() > 0) {
+			int tmp_id = ret_index(source);
+			int temp_id = ret_index(des);
+			destination temp;
+			temp.des = des;
+			temp.edge = ed;
+			temp.id = temp_id;
+			table[tmp_id].dest.push_back(temp);
+		}
 	}
 
 	void delVertex(TVertex sourc)
@@ -211,7 +213,7 @@ public:
 				for (unsigned j = 0; j < table.at(i).dest.size(); j++)
 				{
 					unsigned dest_index = ret_index(table.at(i).dest.at(j).des);
-					w[i][dest_index] = table.at(i).dest.at(j).edge;
+					w[i][dest_index] = static_cast<double>(table.at(i).dest.at(j).edge);
 				}
 			}
 			vector<vector<TVertex>> ways;
